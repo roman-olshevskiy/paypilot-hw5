@@ -22,3 +22,6 @@
 
 - [Зафіксований набір](evidence/dataset-freeze.json).
 - [Прогноз до першого пілота](docs/forecast-before-runs.md) — окремий коміт ще не створено.
+
+- [Фактичний forecast commit](evidence/forecast-commit.json).
+- [Preflight: API, source/model і restore](evidence/preflight-summary.json).

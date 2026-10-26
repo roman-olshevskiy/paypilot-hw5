@@ -1,0 +1,39 @@
+{
+  "runtime": {
+    "app/main.py": "49ea704278816c8949168427b26647a95abbcc5cceccf511c624132bbd4d5309",
+    "app/config.py": "8ae7d31ef77ff235989bdf57c5dbe2678733bc77ddb4c077fa8a05e64143432d",
+    "app/agent/loop.py": "3a04991982d94078da9c6ff6f7bf8feecf194dad97a874316e06cec2fe270e7d",
+    "app/agent/summarize.py": "89903144b7bee59208dbb25fd17d4dd7f96407016a86b0356ad727f0f887ea55",
+    "app/agent/tools.py": "c98f16d9b9213fb57c58ca4cf2fafcb441a4b38b4e6c45e245aba66a19adebf3",
+    "app/agent/providers/base.py": "632f577a6239f81e418050baf21999bd287ce1d827c7c86ae683bd096ddd28ed",
+    "app/agent/providers/anthropic_provider.py": "6af14777823264a1706cbf78caed9d54bb63c9bf7a0c3be420d3ec4015f01c95",
+    "app/engines/policy.py": "6c771f94ad74563ce6a3848432b9f251d161c9c9db735f1c375a57854a4f5101",
+    "app/seed.py": "995f3615793a144f456593c226d0bae41a40ce8cc53f1ab20b06847326480d3b",
+    "profiles/profiles.yaml": "8ca78b9c5b01f4ad109ce4a76f5fdeef493ee1d03e56eb6da2b9cd576717f3ad",
+    "profiles/defects.yaml": "12b69034e62c1ebf7faba067a8d547f5dc7c2cde46def6b0bfe6e7442154d33b",
+    "prompts/base.v1.md": "dcf01a54939cc571f90b6122cd1b56969a101fb35e6b0ee531f8c6e80be9d5d8",
+    "prompts/overlays/fc2aa24d853f.md": "5151df99d0696fc6b500ffdd43fec70b2b142db3b4551b4ceb7d50572c344693",
+    "app/rag/corpus/compliance.md": "8af22d8494a367351125ae85164f9123b954798520c496fb7524f17273684e8b"
+  },
+  "provider": "anthropic",
+  "configured_model": "claude-haiku-5-5",
+  "router": "",
+  "model_calls": 0,
+  "checkout": {
+    "app/main.py": "49ea704278816c8949168427b26647a95abbcc5cceccf511c624132bbd4d5309",
+    "app/config.py": "8ae7d31ef77ff235989bdf57c5dbe2678733bc77ddb4c077fa8a05e64143432d",
+    "app/agent/loop.py": "3a04991982d94078da9c6ff6f7bf8feecf194dad97a874316e06cec2fe270e7d",
+    "app/agent/summarize.py": "89903144b7bee59208dbb25fd17d4dd7f96407016a86b0356ad727f0f887ea55",
+    "app/agent/tools.py": "c98f16d9b9213fb57c58ca4cf2fafcb441a4b38b4e6c45e245aba66a19adebf3",
+    "app/agent/providers/base.py": "632f577a6239f81e418050baf21999bd287ce1d827c7c86ae683bd096ddd28ed",
+    "app/agent/providers/anthropic_provider.py": "6af14777823264a1706cbf78caed9d54bb63c9bf7a0c3be420d3ec4015f01c95",
+    "app/engines/policy.py": "6c771f94ad74563ce6a3848432b9f251d161c9c9db735f1c375a57854a4f5101",
+    "app/seed.py": "995f3615793a144f456593c226d0bae41a40ce8cc53f1ab20b06847326480d3b",
+    "profiles/profiles.yaml": "8ca78b9c5b01f4ad109ce4a76f5fdeef493ee1d03e56eb6da2b9cd576717f3ad",
+    "profiles/defects.yaml": "12b69034e62c1ebf7faba067a8d547f5dc7c2cde46def6b0bfe6e7442154d33b",
+    "prompts/base.v1.md": "dcf01a54939cc571f90b6122cd1b56969a101fb35e6b0ee531f8c6e80be9d5d8",
+    "prompts/overlays/fc2aa24d853f.md": "5151df99d0696fc6b500ffdd43fec70b2b142db3b4551b4ceb7d50572c344693",
+    "app/rag/corpus/compliance.md": "8af22d8494a367351125ae85164f9123b954798520c496fb7524f17273684e8b"
+  },
+  "model_scope": "Configured runtime provider/model; first actual completion model must be checked in pilot trace."
+}

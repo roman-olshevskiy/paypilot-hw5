@@ -1,0 +1,19 @@
+{
+  "recorded_on": "2026-10-26",
+  "status": "passed",
+  "real_preflight_tests_passed": 4,
+  "forecast_commit": "518f6753450df15f0ce22e0e6049ebadf2866a83",
+  "set_hash": "761d416ed750",
+  "runtime_source_matches_checkout": true,
+  "configured_provider": "anthropic",
+  "configured_model": "claude-haiku-5-5",
+  "router": "",
+  "actual_completion_model": "pending pilot trace",
+  "settings_restored": true,
+  "action_tables_unchanged": true,
+  "chat_calls": 0,
+  "model_calls": 0,
+  "reset_calls": 0,
+  "initial_test_correction": "Removed an unnecessary admin=true precondition: require_server_write allows server settings on an unlocked local stand. No failed write or partial settings mutation occurred on that attempt.",
+  "remaining": "Pilot step10: 6 chat requests per profile,12 in total; then assess full-run budget."
+}

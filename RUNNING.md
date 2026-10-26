@@ -63,7 +63,8 @@ Harness-тести запускають справжні cli/runner, але HTTP
 }
 ~~~
 
-Цього файла й forecast commit зараз ще немає. Live unittest до Docker перевіряє:
+Forecast commit518f675 уже підтверджено, evidence/forecast-commit.json створено реальним тестом.
+Live unittest до Docker перевіряє:
 коміт існує, містить ідентичні байти JSONL і forecast із поточним set_hash,
 час коміту раніший за запуск. Adapter повторно перевіряє hash змонтованого набору.
 Це захист від випадкового запуску/підміни версії, не hard cap бюджету.
@@ -108,3 +109,19 @@ python scripts/verify_offline_step7.py
 Live-режим примусово вимкнений; HTTP у інтеграційних тестах підмінено fixture Backend.
 Тимчасовий Docker project і clone прибираються; код початкового кіту не змінюється.
 Потрібні Docker, Git, Python і сусідні source-репозиторії для звірки hashes.
+
+## Реальний preflight без моделі
+
+~~~powershell
+$env:HW5_RUN_PREFLIGHT='1'
+python -m unittest discover -s tests -p test_preflight_hw5.py -v
+Remove-Item Env:HW5_RUN_PREFLIGHT
+~~~
+
+Виконує GET, читання source hashes і конфігурації з контейнера, а також оборотний settings round-trip.
+Не викликає chat, complete, reset або інструменти клієнтських дій.
+Початкові settings повертаються в finally, action tables звіряються до/після.
+На unlocked локальному сервері admin=true не є умовою дозволу server write; за locked без admin тест не змінює settings.
+
+Звичайне offline discovery пропускає4 preflight-тести й1 paid live-тест.
+Скрипт verify_offline_step7.py примусово вимикає обидва режими під час перевірки чистого клону.
