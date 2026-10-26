@@ -1,30 +1,17 @@
-# ДЗ №5 — робоча навігація
+# ДЗ №5 - артефакти для здачі
 
-Комплект ще готується й не призначений для здачі.
+Репозиторій: [roman-olshevskiy/paypilot-hw5](https://github.com/roman-olshevskiy/paypilot-hw5).
+Фінальний комплект підготовлено локально; публічні зміни з’являться після review і merge.
 
-- [Журнал: вісім розділів](security-red-teaming-log.md).
-- [README: команди й майбутні результати](README.md).
-- [Стартовий баланс](evidence/budget-start.json).
-- [Походження й версії](evidence/preparation-manifest.json).
-- [Оригінальний шаблон](sources/Security_Red_Teaming_Log_template_3.md).
+- [Основний журнал: вісім розділів](security-red-teaming-log.md).
+- [Security-кейси:10 JSONL, hash761d416ed750](evals/sets/l06_security.jsonl).
+- [README: результати, команди, матриця кейсів](README.md).
+- [Повні прогони clean/lesson-06 і raw links](docs/full-run-summary.md).
+- [Докладний аналіз механізмів, захисту й залишкового ризику](docs/security-analysis.md).
+- [Додаток: усі58 дослівних відповідей завершених full-серій](docs/security-evidence-appendix.md).
+- [Прогноз до запусків](docs/forecast-before-runs.md), [підтверджений commit](evidence/forecast-commit.json).
+- [Вартість та звірка балансу](evidence/balance-after-full.json).
+- [Інструкція capture/restore](RUNNING.md), [версії джерел](evidence/preparation-manifest.json).
 
-- [Чернетка кейсів](evals/sets/l06_security.jsonl).
-- [Оракули й межі](docs/security-case-design.md).
-- [Походження кейсів](evidence/security-case-provenance.json).
-
-Далі: capture/restore harness, завершення offline-перевірок, review і forecast,
-пілот із бюджетною оцінкою, дві повні серії. Commit/push — після окремої вказівки.
-
-- [Capture/restore та майбутній запуск](RUNNING.md).
-
-- [Чистий клон і завершення кроку7](evidence/offline-validation-step7.json).
-- [Правки assertions до живих прогонів](evidence/dataset-revision-step7.json).
-
-- [Зафіксований набір](evidence/dataset-freeze.json).
-- [Прогноз до першого пілота](docs/forecast-before-runs.md) — окремий коміт ще не створено.
-
-- [Фактичний forecast commit](evidence/forecast-commit.json).
-- [Preflight: API, source/model і restore](evidence/preflight-summary.json).
-
-- [Пілот: результати, докази й бюджет](docs/pilot-review.md).
-- [Машинна звірка пілота](evidence/pilot-analysis.json).
+Деталі зосереджені в додатках; журнал перевірено на двох сторінках A4.
+Надсилання в LMS не виконувалося.

@@ -1,6 +1,6 @@
 # HW5 — запуск і збір доказів
 
-Статус: крок6, harness підготовлено локально. Реальних security-прогонів ще не було.
+Статус: пілот і дві повні серії завершено. Новий live-запуск створить нові витрати й докази.
 Стенд localhost:8000 і кіт paypilot-l06-eval мають лежати поруч із paypilot-hw5.
 Код tracked runner/loader/assertions не змінюється; adapter обгортає native stand.chat та runner._one_run.
 
@@ -14,7 +14,7 @@
   потім trace і state_after для statements_sent, disputes, escalations.
 - restored.json — стан налаштувань після всіх спроб restore.
 - manifest.json — повнота capture, код native runner, помилки, hashes raw reports, forecast reference.
-- console.stdout.txt — native console для майбутнього live unittest.
+- console.stdout.txt — native console для кожного live unittest.
 
 Response записується атомарно до читання trace. Якщо trace/state/capture падає — запуск припиняється
 без автоматичного повтору платного запиту. Transport timeout може означати невідомий оплачений результат;

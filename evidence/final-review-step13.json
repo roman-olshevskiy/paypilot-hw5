@@ -1,0 +1,17 @@
+{
+  "recorded_on": "2026-10-26",
+  "base_commit": "4179d13b519be48799dfa0659c2d8dcea6651dad",
+  "eight_sections": true,
+  "words": 806,
+  "print_pages": 2,
+  "visual_review": "passed",
+  "local_file_links": "passed",
+  "prior_goldens_unchanged": true,
+  "raw_report_hashes": "passed",
+  "new_live_requests": 0,
+  "new_model_calls": 0,
+  "offline_clone_result": "evidence/final-offline-validation.json",
+  "third_person_instructions_found": false,
+  "live_clean_clone_repeat": "Not repeated; completed live evidence plus clean-clone dry-run and fixture integration retained",
+  "journal_sha256": "344af727834e56b409757bbfaab1bd9af9dbaade5371c9b9b7fd5eafbd03c8a0"
+}

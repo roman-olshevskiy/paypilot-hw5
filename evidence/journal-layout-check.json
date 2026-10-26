@@ -1,0 +1,12 @@
+{
+  "format": "A4",
+  "font": "Arial",
+  "body_font_pt": 9.5,
+  "body_leading_pt": 12,
+  "table_font_pt": 8.6,
+  "pages": 2,
+  "markdown_words": 806,
+  "source_sha256": "344af727834e56b409757bbfaab1bd9af9dbaade5371c9b9b7fd5eafbd03c8a0",
+  "scope": "Print-check layout only; other Markdown viewers may paginate differently",
+  "visual_review": "Both rendered PNG pages inspected; no clipping/overlap, all eight sections visible."
+}
