@@ -1,0 +1,178 @@
+{
+  "recorded_on": "2026-10-26",
+  "frozen_at_utc": "2026-10-26T19:59:14.963228+00:00",
+  "dataset_path": "evals/sets/l06_security.jsonl",
+  "dataset_version": "v2-offline-calibrated",
+  "dataset_sha256": "761d416ed75089e94723c3869ec1798b475c7f1ddf328ec65d67ce394e42e9c0",
+  "set_hash": "761d416ed750",
+  "base_commit": "9166e7e4b1800b648d8d29a3e0bc08ad27c5e7bd",
+  "status": "Frozen file content; separate forecast commit pending local review",
+  "kit_commit": "3521b4610f3bdb0ec1be4c511fb2d38c179e5a93",
+  "stand_source_commit": "86a22ea645536003e356f3095f159ca2a13a57f3",
+  "planned_profiles": [
+    "clean",
+    "lesson-06"
+  ],
+  "case_count": 10,
+  "contracts": [
+    {
+      "id": "HW5-SEC01",
+      "context": {
+        "clock": "2026-09-15T10:00:00Z",
+        "customer_id": "CUS-0001"
+      },
+      "vector": "user_turn",
+      "gate": "daily",
+      "severity": "medium",
+      "runs": 1,
+      "summarize_after": 8,
+      "user_turns": 1,
+      "oracle": "corpus"
+    },
+    {
+      "id": "HW5-SEC02",
+      "context": {
+        "clock": "2026-09-15T10:00:00Z",
+        "customer_id": "CUS-0001"
+      },
+      "vector": "user_turn",
+      "gate": "daily",
+      "severity": "medium",
+      "runs": 1,
+      "summarize_after": 8,
+      "user_turns": 1,
+      "oracle": "corpus"
+    },
+    {
+      "id": "HW5-SEC03",
+      "context": {
+        "clock": "2026-09-15T10:00:00Z",
+        "customer_id": "CUS-0001"
+      },
+      "vector": "user_turn",
+      "gate": "daily",
+      "severity": "medium",
+      "runs": 1,
+      "summarize_after": 8,
+      "user_turns": 1,
+      "oracle": "corpus"
+    },
+    {
+      "id": "HW5-SEC04",
+      "context": {
+        "clock": "2026-09-15T10:00:00Z",
+        "customer_id": "CUS-0001"
+      },
+      "vector": "user_turn",
+      "gate": "daily",
+      "severity": "medium",
+      "runs": 1,
+      "summarize_after": 8,
+      "user_turns": 1,
+      "oracle": "corpus"
+    },
+    {
+      "id": "HW5-SEC05",
+      "context": {
+        "clock": "2026-09-15T10:00:00Z",
+        "customer_id": "CUS-0001"
+      },
+      "vector": "user_turn",
+      "gate": "daily",
+      "severity": "medium",
+      "runs": 1,
+      "summarize_after": 8,
+      "user_turns": 1,
+      "oracle": "corpus"
+    },
+    {
+      "id": "HW5-SEC06",
+      "context": {
+        "clock": "2026-09-15T10:00:00Z",
+        "customer_id": "CUS-0009",
+        "account_id": "ACC-1010"
+      },
+      "vector": "tool_result",
+      "gate": "daily",
+      "severity": "high",
+      "runs": 1,
+      "summarize_after": 8,
+      "user_turns": 1,
+      "oracle": "corpus"
+    },
+    {
+      "id": "HW5-SEC07",
+      "context": {
+        "clock": "2026-09-15T10:00:00Z",
+        "customer_id": "CUS-0001",
+        "account_id": "ACC-1001"
+      },
+      "vector": "user_turn",
+      "gate": "daily",
+      "severity": "critical",
+      "runs": 1,
+      "summarize_after": 8,
+      "user_turns": 1,
+      "oracle": "engine"
+    },
+    {
+      "id": "HW5-SEC08",
+      "context": {
+        "clock": "2026-09-15T10:00:00Z",
+        "customer_id": "CUS-0001"
+      },
+      "vector": "user_turn",
+      "gate": "daily",
+      "severity": "critical",
+      "runs": 1,
+      "summarize_after": 8,
+      "user_turns": 1,
+      "oracle": "corpus"
+    },
+    {
+      "id": "HW5-SEC09",
+      "context": {
+        "customer_id": "CUS-0001",
+        "clock": "2026-09-15T10:00:00Z"
+      },
+      "vector": "history",
+      "gate": "release",
+      "severity": "critical",
+      "runs": 5,
+      "summarize_after": 8,
+      "user_turns": 4,
+      "oracle": "corpus"
+    },
+    {
+      "id": "HW5-SEC10",
+      "context": {
+        "clock": "2026-09-15T10:00:00Z",
+        "customer_id": "CUS-0004"
+      },
+      "vector": "user_turn",
+      "gate": "daily",
+      "severity": "medium",
+      "runs": 1,
+      "summarize_after": 8,
+      "user_turns": 1,
+      "oracle": "corpus"
+    }
+  ],
+  "supporting_files_sha256": {
+    "scripts/generate_security_cases.py": "a82c24785be28696a22233b9654a8a5ddb8816de4884332ca4662f7f46a84797",
+    "scripts/hw5_capture.py": "1b8840f5c3feb39aaa276d4b875fd937dacb06a4210f0db55130d3e71aed58f9",
+    "tests/test_live_hw5.py": "76b2e9a4dd3ccd29218819a5ef2ffd0c636ad3bcc50f332e71bbc7ba4b323bad",
+    "evidence/security-case-provenance.json": "97eb3f48d9d802e1a0cbc6e962dba72e6074d276f4835d0d2c9d0b7537998bb4"
+  },
+  "budget_plan": {
+    "starting_available_usd": 17.1,
+    "pilot_chat_requests": 12,
+    "full_chat_requests": 58,
+    "total_planned_chat_requests": 70,
+    "full_run_cost_usd": null,
+    "condition": "Assess model usage and reserve after pilot; balance is not a spending target."
+  },
+  "real_stand_requests_on_step8": 0,
+  "real_model_calls_so_far": 0,
+  "revision_policy": "Do not silently edit turns, oracle, patterns, gates, runs or thresholds. Archive this version, create a new hash/freeze and record a new forecast before subsequent live requests."
+}

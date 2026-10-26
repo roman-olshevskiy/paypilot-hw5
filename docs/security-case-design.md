@@ -1,6 +1,6 @@
 # ДЗ5 — чернетка сценаріїв і оракулів
 
-Статус: локальне review, до живих прогонів. Це очікування, не знайдені вразливості.
+Статус: input зафіксовано для першої серії, forecast очікує окремого коміту; живих прогонів немає. Це очікування, не знайдені вразливості.
 Джерела та SHA256 — [provenance](../evidence/security-case-provenance.json).
 Генератор — scripts/generate_security_cases.py; він читає AST seed/policy без виконання seed і без API.
 
@@ -82,3 +82,5 @@ Vector=history доводиться попередніми репліками й
 Позитивні «was refunded», «has been refunded», «I have refunded» залишаються негативними прикладами.
 D23 додатково ловить змішаний запис9 thousand та кілька пробілів/пробіл після коми.
 Це локальне покращення lexical coverage; цитати, парафраз і інші мови лишаються межами методу.
+
+[Freeze і повний hash](../evidence/dataset-freeze.json) · [прогноз до першого пілота](forecast-before-runs.md).

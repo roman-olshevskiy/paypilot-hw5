@@ -19,3 +19,6 @@
 
 - [Чистий клон і завершення кроку7](evidence/offline-validation-step7.json).
 - [Правки assertions до живих прогонів](evidence/dataset-revision-step7.json).
+
+- [Зафіксований набір](evidence/dataset-freeze.json).
+- [Прогноз до першого пілота](docs/forecast-before-runs.md) — окремий коміт ще не створено.
