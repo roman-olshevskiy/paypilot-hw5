@@ -1,0 +1,36 @@
+{
+  "recorded_on": "2026-10-26",
+  "repositories": {
+    "paypilot-l06-eval": {
+      "commit": "3521b4610f3bdb0ec1be4c511fb2d38c179e5a93",
+      "tracked_status": ""
+    },
+    "paypilot-stand-shared": {
+      "commit": "86a22ea645536003e356f3095f159ca2a13a57f3",
+      "tracked_status": ""
+    },
+    "paypilot-hw2": {
+      "commit": "534ff5f502eae633db6cc54de008a5bd64882334",
+      "tracked_status": ""
+    },
+    "paypilot-hw3": {
+      "commit": "6e22fbcb1ee464024db4936f52e2e391690a5f8f",
+      "tracked_status": ""
+    },
+    "paypilot-hw4": {
+      "commit": "44e12b1fd8f2a8832a491d09e2137c6b8d93da9b",
+      "tracked_status": ""
+    }
+  },
+  "protected_datasets_sha256": {
+    "D:\\neoversity\\paypilot-hw2\\golden.jsonl": "76c936eba16dd02e0a79cba2345282bf32400e857b356483dd84940ca1c7959b",
+    "D:\\neoversity\\paypilot-hw3\\golden.jsonl": "97dc8e0936fae04e95e2b33829480e15e773d970bddc43109b457d73cee34963",
+    "D:\\neoversity\\paypilot-hw4\\l05_dialogs.jsonl": "d7ea1a1c292f498d48c311229d82d3b35f95a98d11df45f9c2996351e355141e"
+  },
+  "source_template_sha256": "aa8c74bafd748d8c93b4c1f86a5068124b1a0b612f0cae42b2a73ab3837bc802",
+  "kit_reference_set_sha256": "6e897fd64966d4e6895a722866596eab9c897b0b2a1501c23da1673f03c86a84",
+  "stand_url": "http://localhost:8000",
+  "baseline_commit": "6b6248f58a4d4aef941588970b8cb266598e1cd7",
+  "remote": "https://github.com/roman-olshevskiy/paypilot-hw5",
+  "branch": "codex/hw5-security"
+}
