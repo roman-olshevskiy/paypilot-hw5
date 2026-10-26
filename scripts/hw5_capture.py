@@ -5,6 +5,7 @@ import json
 import os
 import shutil
 import sys
+import time
 from collections import Counter
 from datetime import datetime,timezone
 from pathlib import Path
@@ -21,8 +22,17 @@ def save(path,value):
     path=Path(path)
     path.parent.mkdir(parents=True,exist_ok=True)
     tmp=path.with_suffix(path.suffix+".tmp")
-    tmp.write_bytes((json.dumps(value,ensure_ascii=False,indent=2)+chr(10)).encode("utf-8"))
-    tmp.replace(path)
+    data=(json.dumps(value,ensure_ascii=False,indent=2)+chr(10)).encode("utf-8")
+    # Docker bind mounts on Windows can briefly deny rename while a host reader holds the file.
+    # Retry only local file I/O, never chat/trace/state HTTP requests.
+    for attempt in range(8):
+        try:
+            tmp.write_bytes(data)
+            tmp.replace(path)
+            return
+        except PermissionError:
+            if attempt==7:raise
+            time.sleep(min(0.05*(2**attempt),0.5))
 
 def snapshot(stand):
     return {name:stand._call("GET",endpoint) for name,endpoint in {

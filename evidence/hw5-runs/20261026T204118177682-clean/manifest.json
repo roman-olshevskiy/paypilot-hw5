@@ -1,0 +1,30 @@
+{
+  "profile": "clean",
+  "argv": [
+    "--set",
+    "l06_security",
+    "--profile",
+    "clean",
+    "--gate",
+    "all",
+    "--traces"
+  ],
+  "runner_exit_code": 0,
+  "chat_attempts": 29,
+  "captured_responses": 29,
+  "complete_captures": 29,
+  "reports": [
+    "l06_security-clean-20261026T204118.json"
+  ],
+  "report_sha256": {
+    "l06_security-clean-20261026T204118.json": "ef39beb50d6e1aa6db815d2c1f3ff99fd7b5f95a60626db788e5cc4c8e046874"
+  },
+  "restore_status": "passed",
+  "restore_errors": [],
+  "artifact_errors": [],
+  "error": null,
+  "set_hash": "761d416ed750",
+  "forecast_commit": "518f6753450df15f0ce22e0e6049ebadf2866a83",
+  "usage_scope": "Root/chat usage may omit summarizer/cache billing; absent usage is not zero.",
+  "state_scope": "State snapshots are evidence; arbitrary initial DB/session state is not restored."
+}

@@ -1,0 +1,11 @@
+{
+  "recorded_on": "2026-10-26",
+  "source": "Direct balance confirmation in this chat after pilot",
+  "method": "available balance shown to two decimals",
+  "before_pilot_usd": 17.1,
+  "after_pilot_before_full_usd": 17.09,
+  "observed_pilot_delta_usd": 0.01,
+  "pilot_recorded_root_cost_usd": 0.007494,
+  "scope": "Balance delta is consistent at display precision; not an itemized invoice or allocation of the difference.",
+  "full_series_reconciliation": "pending"
+}
