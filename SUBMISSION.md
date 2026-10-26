@@ -1,7 +1,7 @@
 # ДЗ №5 - артефакти для здачі
 
 Репозиторій: [roman-olshevskiy/paypilot-hw5](https://github.com/roman-olshevskiy/paypilot-hw5).
-Фінальний комплект підготовлено локально; публічні зміни з’являться після review і merge.
+Фінальний комплект опубліковано в main.
 
 - [Основний журнал: вісім розділів](security-red-teaming-log.md).
 - [Security-кейси:10 JSONL, hash761d416ed750](evals/sets/l06_security.jsonl).

@@ -1,6 +1,6 @@
 # ДЗ5 — чернетка сценаріїв і оракулів
 
-Статус: input зафіксовано, forecast518f675 підтверджено; завершено лише пілот. [Спостереження](pilot-review.md) відокремлені від початкових очікувань. Це очікування, не знайдені вразливості.
+Статус: input зафіксовано, forecast518f675 підтверджено; пілот і повні серії завершено; [фактичний аналіз](security-analysis.md). [Спостереження](pilot-review.md) відокремлені від початкових очікувань. Це очікування, не знайдені вразливості.
 Джерела та SHA256 — [provenance](../evidence/security-case-provenance.json).
 Генератор — scripts/generate_security_cases.py; він читає AST seed/policy без виконання seed і без API.
 
@@ -73,7 +73,7 @@ Vector=history доводиться попередніми репліками й
 
 [Offline-тести](../tests/test_security_draft.py) — 7/7;
 [лог повної offline-перевірки](../evidence/clean-clone-step7-tests.txt), [нативний Docker dry-run](../evidence/clean-clone-step7-dry-run.txt).
-Код кіту та стенду не змінений. Файли незакомічені для локального review.
+Код кіту та стенду не змінений. Зафіксовані кейси й результати опубліковано в main.
 
 ## Калібрування кроку7
 

@@ -1,4 +1,7 @@
 """Reproducible offline check against a disposable clean L06 clone. No live calls."""
+import argparse
+from datetime import datetime, timezone
+import uuid
 import hashlib
 import json
 import os
@@ -22,11 +25,18 @@ def checked(command,cwd,env=None):
     return p.stdout+p.stderr
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check-prior-datasets",action="store_true",
+                        help="Also audit historical HW2-HW4 paths from the preparation manifest")
+    args=parser.parse_args()
+    output=ROOT/"evidence/offline-runs"/(datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")+"-"+uuid.uuid4().hex[:8])
+    output.mkdir(parents=True,exist_ok=False)
     prepared=json.loads((ROOT/"evidence/preparation-manifest.json").read_text(encoding="utf-8"))
     revision=prepared["repositories"]["paypilot-l06-eval"]["commit"]
     expected=sha(ROOT/"evals/sets/l06_security.jsonl")
-    for path,digest in prepared["protected_datasets_sha256"].items():
-        if sha(path)!=digest:raise RuntimeError("Earlier dataset changed: "+path)
+    if args.check_prior_datasets:
+        for path,digest in prepared["protected_datasets_sha256"].items():
+            if sha(path)!=digest:raise RuntimeError("Earlier dataset changed: "+path)
     before=checked(["git","diff","--name-only"],KIT).strip()
     if before:raise RuntimeError("Tracked kit changes must be reviewed first")
     parent=Path(tempfile.gettempdir()).resolve()
@@ -48,7 +58,7 @@ def main():
         docker_started=True
         dry=checked(["docker","compose","-p",project,"run","--rm","-T","eval",
                      "--set","l06_security","--gate","all","--dry-run"],clone,env)
-        (ROOT/"evidence/clean-clone-step7-dry-run.txt").write_bytes(dry.encode("utf-8"))
+        (output/"dry-run.txt").write_bytes(dry.encode("utf-8"))
         test_code=(
           "import os,pathlib,loader,runner,unittest;"
           "p=pathlib.Path(os.environ['HW5_KIT_DIR']).resolve();"
@@ -57,7 +67,7 @@ def main():
           "print('Native loader/runner imported from verified clean clone',flush=True);"
           "unittest.main(module=None,argv=['step7','discover','-s','tests','-p','test_*.py','-v'])")
         tests=checked([sys.executable,"-c",test_code],ROOT,env)
-        (ROOT/"evidence/clean-clone-step7-tests.txt").write_bytes(tests.encode("utf-8"))
+        (output/"tests.txt").write_bytes(tests.encode("utf-8"))
         tracked=checked(["git","status","--porcelain","--untracked-files=no"],clone).strip()
         if tracked:raise RuntimeError("Native tracked files were modified")
         match=re.search(r"Ran (\d+) tests",tests)
@@ -70,7 +80,7 @@ def main():
             raise RuntimeError("Unexpected skipped-test coverage")
         count=int(match.group(1))
         native=["loader.py","runner.py","stand.py","assertions.py","cli.py","validate.py","docker-compose.yml"]
-        proof={"recorded_on":"2026-10-26","kit_commit":revision,
+        proof={"recorded_on":datetime.now(timezone.utc).isoformat(),"kit_commit":revision,
                "clone_source":"Disposable local clone, detached to pinned official commit",
                "cloned_files_clean_before_input":True,"tracked_files_unchanged_after_tests":True,
                "own_dataset_sha256":expected,"set_hash":expected[:12],
@@ -78,10 +88,11 @@ def main():
                "native_docker_dry_run":"passed","offline_tests_run":count,
                "offline_passed":count-skipped,"live_tests_skipped":live_skips,"preflight_tests_skipped":preflight_skips,
                "real_stand_requests":0,"real_model_calls":0,
-               "prior_dataset_hashes_unchanged":True,
+               "prior_dataset_audit":"passed" if args.check_prior_datasets else "not_requested",
                "scope":"Fake HTTP integration and native dry-run; no live profile/DB/model exercised"}
-        (ROOT/"evidence/offline-validation-step7.json").write_bytes(
+        (output/"validation.json").write_bytes(
             (json.dumps(proof,ensure_ascii=False,indent=2)+chr(10)).encode("utf-8"))
+        print("Output: "+str(output),flush=True)
         print(json.dumps(proof,ensure_ascii=False,indent=2))
     finally:
         if docker_started and clone.exists():

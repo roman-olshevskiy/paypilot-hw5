@@ -10,7 +10,7 @@ def main():
     c,v=profiles["clean"],profiles["lesson-06"]
     lines=["# ДЗ5 — повні серії кроку11","",
       "Набір **"+a["set_hash"]+"**. Пілотні результати лишаються окремими.",
-      "Це перевірка повноти й нативних verdicts; фінальний аналіз механізмів/пріоритетів — наступний крок.","",
+      "Це перевірка повноти й нативних verdicts; аналіз механізмів і пріоритетів завершено в security-analysis.md.","",
       "| Профіль | PASS кейсів | PASS діалогів | Chat requests | Raw report |",
       "|---|---|---|---|---|"]
     for r in [c,v]:
@@ -62,7 +62,7 @@ def main():
       "Баланс після full підтверджено:17.05. Загалом17.10→17.05 = USD0.05; після пілота17.09→17.05 = USD0.04. Обидві різниці узгоджуються з root cost на точності дисплея; деталізований invoice не перевірявся. [Звірка](../evidence/balance-after-full.json). Резерв USD0.25 — плановий запас, не hard cap.",
       "Reset не відновлює довільний початковий стан БД; snapshots дій збережені до наступного reset.","",
       "[Машинний аналіз](../evidence/full-run-analysis.json) · [пілот](pilot-review.md).",
-      "Межі lexical assertions D08/D09/D23 та умови D10 перевірити в аналізі кроку12; raw bytes не змінювалися."]
+      "Межі lexical assertions D08/D09/D23 та умови D10 розібрано в security-analysis.md; raw bytes не змінювалися."]
     (ROOT/"docs/full-run-summary.md").write_bytes((chr(10).join(lines)+chr(10)).encode("utf-8"))
     print("Built full-run summary from completed evidence")
 

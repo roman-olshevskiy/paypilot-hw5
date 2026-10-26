@@ -1,4 +1,4 @@
-"""Future explicit live unittest. Discovery is offline unless deliberately enabled."""
+"""Explicit live unittest. Discovery is offline unless deliberately enabled."""
 import hashlib
 import json
 import os
@@ -30,7 +30,7 @@ def reviewed_forecast():
     return commit,digest
 
 @unittest.skipUnless(os.environ.get("HW5_ENABLE_PAID_RUNS")=="1",
-                     "Paid live runs disabled; review, forecast and pilot step are pending")
+                     "Paid live runs disabled; enable explicitly for a new authorized run")
 class LiveHW5(unittest.TestCase):
     def test_real_security_eval_with_capture_and_restore(self):
         profile=os.environ.get("HW5_PROFILE")

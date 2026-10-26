@@ -1,0 +1,27 @@
+{
+  "recorded_on": "2026-10-26T21:36:22.145275+00:00",
+  "kit_commit": "3521b4610f3bdb0ec1be4c511fb2d38c179e5a93",
+  "clone_source": "Disposable local clone, detached to pinned official commit",
+  "cloned_files_clean_before_input": true,
+  "tracked_files_unchanged_after_tests": true,
+  "own_dataset_sha256": "761d416ed75089e94723c3869ec1798b475c7f1ddf328ec65d67ce394e42e9c0",
+  "set_hash": "761d416ed750",
+  "native_source_sha256": {
+    "loader.py": "e32d8dfce92595bd86976995908cc1fd70bebc673e7d2dfc10cf9733ff412024",
+    "runner.py": "9a917f233b2ba8e81976748af2106a0fe56e3e16e18190204d455425265e0185",
+    "stand.py": "9571ae73aab1a44b639517376d29be3c5a3361a6137a1ebb84f6f7b7e408d3d7",
+    "assertions.py": "8d7f6b36fbd61314f7d006bc92f0ad0e2c12fe77c5b38206ab4d3453e414f05c",
+    "cli.py": "4f09cb94c84b8c880a6306290440998c727b32271656e32e12921c9614d34053",
+    "validate.py": "17d760dd398705a200cd5cf7f860dc7e9741fb32e6aa2a0fe16a72364bec18ea",
+    "docker-compose.yml": "a99b19ef7930ceaa288a5f9df10df81b8ae515dbbdc3c4c542246179624943dc"
+  },
+  "native_docker_dry_run": "passed",
+  "offline_tests_run": 22,
+  "offline_passed": 17,
+  "live_tests_skipped": 1,
+  "preflight_tests_skipped": 4,
+  "real_stand_requests": 0,
+  "real_model_calls": 0,
+  "prior_dataset_audit": "passed",
+  "scope": "Fake HTTP integration and native dry-run; no live profile/DB/model exercised"
+}

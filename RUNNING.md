@@ -69,7 +69,7 @@ Live unittest до Docker перевіряє:
 час коміту раніший за запуск. Adapter повторно перевіряє hash змонтованого набору.
 Це захист від випадкового запуску/підміни версії, не hard cap бюджету.
 
-Після кроків7–9, у межах погодженого кроку10:
+Для нового погодженого пілота:
 
 ~~~powershell
 $env:HW5_ENABLE_PAID_RUNS='1'
@@ -98,7 +98,7 @@ Remove-Item Env:HW5_PROFILE
 Remove-Item Env:HW5_PHASE
 ~~~
 
-## Повторення offline-верифікації кроку7
+## Повторення offline-верифікації
 
 ~~~powershell
 python scripts/verify_offline_step7.py
@@ -125,3 +125,32 @@ Remove-Item Env:HW5_RUN_PREFLIGHT
 
 Звичайне offline discovery пропускає4 preflight-тести й1 paid live-тест.
 Скрипт verify_offline_step7.py примусово вимикає обидва режими під час перевірки чистого клону.
+
+
+## Результати повторних offline-перевірок
+
+Кожен запуск verify_offline_step7.py створює унікальний каталог evidence/offline-runs/
+із dry-run.txt, tests.txt і validation.json. Історичні докази кроку7 залишаються незмінними.
+Типово потрібні лише HW5, L06-кіт і shared-стенд; попередні HW2–HW4 не читаються.
+
+Окремий аудит попередніх датасетів:
+
+~~~powershell
+python scripts/verify_offline_step7.py --check-prior-datasets
+~~~
+
+Цей режим використовує історичні абсолютні шляхи з preparation-manifest.json
+і потребує тих репозиторіїв за вказаними шляхами.
+
+## Повторний аналіз збережених серій
+
+~~~powershell
+python scripts/analyze_full_runs.py --selection evidence/analysis-selection.json
+~~~
+
+Маніфест явно визначає full_runs для порівняння та ledger_runs для обліку вартості,
+включно з пілотом і перерваною спробою. Нові каталоги прогонів автоматично не підбираються.
+Для іншого порівняння створити окремий manifest; всі full_runs мають входити в ledger_runs.
+Аналіз перевіряє завершеність full, hash набору й raw report, verdict replay та унікальність IDs.
+Вихід: новий evidence/analysis-runs/<UTC-ID>/analysis.json; історичний full-run-analysis.json не змінюється.
+Це offline replay збережених відповідей, без звернень до стенду.

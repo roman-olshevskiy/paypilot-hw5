@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "Default selected ledger reproduced original scores/counts/cost",
+    "Single-full-run selection:29 requests",
+    "Invalid/duplicate/path-traversal selections rejected without output",
+    "Two offline invocations created distinct folders",
+    "Default prior_dataset_audit=not_requested; explicit audit=passed",
+    "Historical tracked evidence/reports/sources/frozen dataset/forecast/journal byte-identical to HEAD"
+  ],
+  "offline_passed_per_run": 17,
+  "skipped_per_run": 5,
+  "new_live_requests": 0
+}
