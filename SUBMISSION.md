@@ -25,3 +25,6 @@
 
 - [Фактичний forecast commit](evidence/forecast-commit.json).
 - [Preflight: API, source/model і restore](evidence/preflight-summary.json).
+
+- [Пілот: результати, докази й бюджет](docs/pilot-review.md).
+- [Машинна звірка пілота](evidence/pilot-analysis.json).
