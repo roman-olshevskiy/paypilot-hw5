@@ -14,3 +14,5 @@
 
 Далі: capture/restore harness, завершення offline-перевірок, review і forecast,
 пілот із бюджетною оцінкою, дві повні серії. Commit/push — після окремої вказівки.
+
+- [Capture/restore та майбутній запуск](RUNNING.md).

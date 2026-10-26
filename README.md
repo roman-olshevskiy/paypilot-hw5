@@ -51,7 +51,7 @@ Live-команди ще не виконувалися; dry-run пройшов �
 | lesson-06 | ще не виконано | — |
 
 Попередні golden та здані домашні роботи не змінюються.
-Робоча гілка codex/hw5-security-cases; файли в main лише через PR.
+Робоча гілка codex/hw5-capture-harness; файли в main лише через PR.
 
 ## Локальне рев’ю
 
@@ -63,3 +63,13 @@ Offline: 7/7 passed; [сухий запуск](evidence/draft-dry-run.txt) — 1
 Слово multi_turn у зведенні кіту рахує поле turns; фактично довгий діалог лише один.
 Планова повна серія: 29 chat requests/профіль, 58 на два; з окремим пілотом12 — 70.
 Поточні chat/model calls: 0. Платні прогони — після harness, review, forecast і оцінки бюджету за пілотом.
+
+## Capture/restore harness
+
+[Інструкція](RUNNING.md), [adapter](scripts/hw5_capture.py), [live unittest](tests/test_live_hw5.py).
+Зберігає response до trace, стан тестових таблиць на кожному ході, raw reports/traces і SHA256.
+Settings відновлюються незалежними операціями; помилка capture припиняє прогін без автоповтору.
+Наявність слова «PASS» у fixture-тестах не є результатом реального стенду.
+
+Live entry point вимкнений за замовчуванням і до запуску перевіряє окремий forecast commit.
+Forecast ще не створено; платних запусків немає. Зміни локальні, до commit/push потрібна окрема вказівка.

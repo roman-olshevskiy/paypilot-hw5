@@ -1,0 +1,17 @@
+{
+  "recorded_on": "2026-10-26",
+  "verification": "offline native L06 CLI with fake HTTP boundary",
+  "tests_run": 16,
+  "passed": 15,
+  "skipped_live": 1,
+  "real_stand_requests": 0,
+  "real_model_calls": 0,
+  "new_dataset_hash": false,
+  "dataset_sha256": "4c608987b451b507e3356bdf7ca82ec7103e9856e68cf507c386de0cb2923b9c",
+  "source_sha256": {
+    "scripts/hw5_capture.py": "1b8840f5c3feb39aaa276d4b875fd937dacb06a4210f0db55130d3e71aed58f9",
+    "tests/test_capture_harness.py": "59f52acd8fea4c9bff734a1a4c505aeb1238a340a7baa5e5283afb1e88f2f2c3",
+    "tests/test_live_hw5.py": "76b2e9a4dd3ccd29218819a5ef2ffd0c636ad3bcc50f332e71bbc7ba4b323bad"
+  },
+  "pending": "Live preflight and actual restore against running server are step9; no forecast/live series yet."
+}
