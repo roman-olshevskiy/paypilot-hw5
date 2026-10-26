@@ -96,3 +96,15 @@ Remove-Item Env:HW5_ENABLE_PAID_RUNS
 Remove-Item Env:HW5_PROFILE
 Remove-Item Env:HW5_PHASE
 ~~~
+
+## Повторення offline-верифікації кроку7
+
+~~~powershell
+python scripts/verify_offline_step7.py
+~~~
+
+Скрипт створює тимчасовий локальний клон кіту на зафіксованому commit, додає власний JSONL,
+виконує Docker dry-run і offline-тести саме з loader/runner цього клону.
+Live-режим примусово вимкнений; HTTP у інтеграційних тестах підмінено fixture Backend.
+Тимчасовий Docker project і clone прибираються; код початкового кіту не змінюється.
+Потрібні Docker, Git, Python і сусідні source-репозиторії для звірки hashes.

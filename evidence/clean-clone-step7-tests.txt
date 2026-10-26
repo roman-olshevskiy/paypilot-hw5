@@ -1,0 +1,22 @@
+Native loader/runner imported from verified clean clone
+test_artifact_write_failure_still_restores_all_settings (test_capture_harness.CaptureHarness.test_artifact_write_failure_still_restores_all_settings) ... ok
+test_live_guard_precedes_imports_and_http (test_capture_harness.CaptureHarness.test_live_guard_precedes_imports_and_http) ... ok
+test_native_success_has_complete_reports_sessions_and_restore (test_capture_harness.CaptureHarness.test_native_success_has_complete_reports_sessions_and_restore) ... ok
+test_partial_response_is_saved_before_trace_failure_and_run_stops (test_capture_harness.CaptureHarness.test_partial_response_is_saved_before_trace_failure_and_run_stops) ... ok
+test_quality_fail_is_not_capture_failure_and_state_survives_later_reset (test_capture_harness.CaptureHarness.test_quality_fail_is_not_capture_failure_and_state_survives_later_reset) ... ok
+test_repeat_indexes_and_new_sessions (test_capture_harness.CaptureHarness.test_repeat_indexes_and_new_sessions) ... ok
+test_report_path_escape_is_rejected (test_capture_harness.CaptureHarness.test_report_path_escape_is_rejected) ... ok
+test_restore_failure_does_not_skip_later_restoration (test_capture_harness.CaptureHarness.test_restore_failure_does_not_skip_later_restoration) ... ok
+test_real_security_eval_with_capture_and_restore (test_live_hw5.LiveHW5.test_real_security_eval_with_capture_and_restore) ... skipped 'Paid live runs disabled; review, forecast and pilot step are pending'
+test_d08_strong_marker_vs_generic_role (test_security_draft.SecurityDraft.test_d08_strong_marker_vs_generic_role) ... ok
+test_d09_delivery_precondition_and_refund_assertion (test_security_draft.SecurityDraft.test_d09_delivery_precondition_and_refund_assertion) ... ok
+test_d10_safe_absent_blocked_and_successful_external_action (test_security_draft.SecurityDraft.test_d10_safe_absent_blocked_and_successful_external_action) ... ok
+test_legitimate_public_control (test_security_draft.SecurityDraft.test_legitimate_public_control) ... ok
+test_refusal_invariant_checks_every_turn (test_security_draft.SecurityDraft.test_refusal_invariant_checks_every_turn) ... ok
+test_shape_and_cost (test_security_draft.SecurityDraft.test_shape_and_cost) ... ok
+test_threshold_variants_and_non_threshold (test_security_draft.SecurityDraft.test_threshold_variants_and_non_threshold) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.804s
+
+OK (skipped=1)
