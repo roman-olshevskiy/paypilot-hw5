@@ -1,0 +1,12 @@
+test_d08_strong_marker_vs_generic_role (test_security_draft.SecurityDraft.test_d08_strong_marker_vs_generic_role) ... ok
+test_d09_delivery_precondition_and_refund_assertion (test_security_draft.SecurityDraft.test_d09_delivery_precondition_and_refund_assertion) ... ok
+test_d10_safe_absent_blocked_and_successful_external_action (test_security_draft.SecurityDraft.test_d10_safe_absent_blocked_and_successful_external_action) ... ok
+test_legitimate_public_control (test_security_draft.SecurityDraft.test_legitimate_public_control) ... ok
+test_refusal_invariant_checks_every_turn (test_security_draft.SecurityDraft.test_refusal_invariant_checks_every_turn) ... ok
+test_shape_and_cost (test_security_draft.SecurityDraft.test_shape_and_cost) ... ok
+test_threshold_variants_and_non_threshold (test_security_draft.SecurityDraft.test_threshold_variants_and_non_threshold) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.006s
+
+OK

@@ -8,5 +8,9 @@
 - [Походження й версії](evidence/preparation-manifest.json).
 - [Оригінальний шаблон](sources/Security_Red_Teaming_Log_template_3.md).
 
-Далі: власний evals/sets/l06_security.jsonl, offline-перевірки, forecast,
-пілот із бюджетною оцінкою, дві повні серії й PR.
+- [Чернетка кейсів](evals/sets/l06_security.jsonl).
+- [Оракули й межі](docs/security-case-design.md).
+- [Походження кейсів](evidence/security-case-provenance.json).
+
+Далі: capture/restore harness, завершення offline-перевірок, review і forecast,
+пілот із бюджетною оцінкою, дві повні серії. Commit/push — після окремої вказівки.

@@ -1,6 +1,6 @@
 # L06 · Security & Red Teaming Log — PayPilot · ДЗ №5
 
-Статус: підготовка репозиторію; кейси та живі результати ще не створено.
+Статус: 10 власних кейсів підготовлено локально; живих результатів ще немає.
 [Артефакти](SUBMISSION.md) · [Робочий журнал](security-red-teaming-log.md).
 
 Стартовий доступний баланс — **USD17.10**, підтверджено 2026-10-26:
@@ -11,7 +11,7 @@
 
 Кіт alex-pancho/paypilot-l06-eval, commit 3521b46.
 Стенд paypilot-stand-shared, commit 86a22ea.
-Після створення власного evals/sets/l06_security.jsonl скопіювати його в sets/ кіту.
+Власний [evals/sets/l06_security.jsonl](evals/sets/l06_security.jsonl) для запуску копіюється в sets/ кіту.
 STAND_DIR=../paypilot-stand-shared; EVAL_STAND_URL=http://host.docker.internal:8000.
 
 З каталогу кіту:
@@ -22,17 +22,26 @@ docker compose run --rm eval --set l06_security --profile clean --gate all --tra
 docker compose run --rm eval --set l06_security --profile lesson-06 --gate all --traces
 ~~~
 
-Це команди майбутніх запусків. Набір ще відсутній, тому вони поки не є готовою інструкцією здачі.
+Live-команди ще не виконувалися; dry-run пройшов через read-only mount власного JSONL.
 Уся активність зі стендом виконується через реальні тести/eval.
 
 ## Security-кейси
 
-Заплановано 10 власних кейсів; обов’язковий мінімум — 6.
-Матриця ще не заморожена; set_hash з’явиться після створення JSONL.
+Створено 10 чернеткових кейсів; набір ще не заморожений. Поточний set_hash: **4c608987b451**.
+[Сценарії, оракули й межі перевірок](docs/security-case-design.md).
 
 | id | Знахідка | vector | gate | severity |
 |---|---|---|---|---|
-| — | кейси ще не створено | — | — | — |
+| HW5-SEC01 | D08: сильні маркери промпту | user_turn | daily | medium |
+| HW5-SEC02 | D08: сильні маркери промпту | user_turn | daily | medium |
+| HW5-SEC03 | D08: сильні маркери промпту | user_turn | daily | medium |
+| HW5-SEC04 | D08: сильні маркери промпту | user_turn | daily | medium |
+| HW5-SEC05 | D08: сильні маркери промпту | user_turn | daily | medium |
+| HW5-SEC06 | D09: merchant payload | tool_result | daily | high |
+| HW5-SEC07 | D10: сторонній recipient | user_turn | daily | critical |
+| HW5-SEC08 | D23: поріг AML | user_turn | daily | critical |
+| HW5-SEC09 | D23: поріг AML | history | release | critical |
+| HW5-SEC10 | контроль: публічний строк спору | user_turn | daily | medium |
 
 ## Прогін
 
@@ -42,4 +51,15 @@ docker compose run --rm eval --set l06_security --profile lesson-06 --gate all -
 | lesson-06 | ще не виконано | — |
 
 Попередні golden та здані домашні роботи не змінюються.
-Робоча гілка codex/hw5-security; файли в main лише через PR.
+Робоча гілка codex/hw5-security-cases; файли в main лише через PR.
+
+## Локальне рев’ю
+
+~~~powershell
+python -m unittest discover -s tests -p test_security_draft.py -v
+~~~
+
+Offline: 7/7 passed; [сухий запуск](evidence/draft-dry-run.txt) — 10 кейсів, daily9/release1.
+Слово multi_turn у зведенні кіту рахує поле turns; фактично довгий діалог лише один.
+Планова повна серія: 29 chat requests/профіль, 58 на два; з окремим пілотом12 — 70.
+Поточні chat/model calls: 0. Платні прогони — після harness, review, forecast і оцінки бюджету за пілотом.
