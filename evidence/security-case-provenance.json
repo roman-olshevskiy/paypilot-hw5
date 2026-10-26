@@ -1,8 +1,8 @@
 {
   "recorded_on": "2026-10-26",
   "status": "draft, not frozen; no live results",
-  "dataset_sha256": "4c608987b451b507e3356bdf7ca82ec7103e9856e68cf507c386de0cb2923b9c",
-  "set_hash": "4c608987b451",
+  "dataset_sha256": "761d416ed75089e94723c3869ec1798b475c7f1ddf328ec65d67ce394e42e9c0",
+  "set_hash": "761d416ed750",
   "case_count": 10,
   "oracles": {
     "threshold_eur": 9000,

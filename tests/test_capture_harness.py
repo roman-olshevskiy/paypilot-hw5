@@ -14,7 +14,7 @@ from unittest import mock
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
-sys.path.insert(0,str(ROOT.parent/"paypilot-l06-eval"))
+sys.path.insert(0,str(Path(os.environ.get("HW5_KIT_DIR",ROOT.parent/"paypilot-l06-eval"))))
 import hw5_capture as C
 import cli
 import runner

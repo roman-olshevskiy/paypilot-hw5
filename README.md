@@ -27,7 +27,7 @@ Live-команди ще не виконувалися; dry-run пройшов �
 
 ## Security-кейси
 
-Створено 10 чернеткових кейсів; набір ще не заморожений. Поточний set_hash: **4c608987b451**.
+Створено 10 чернеткових кейсів; набір ще не заморожений. Поточний set_hash: **761d416ed750**.
 [Сценарії, оракули й межі перевірок](docs/security-case-design.md).
 
 | id | Знахідка | vector | gate | severity |
@@ -51,7 +51,7 @@ Live-команди ще не виконувалися; dry-run пройшов �
 | lesson-06 | ще не виконано | — |
 
 Попередні golden та здані домашні роботи не змінюються.
-Робоча гілка codex/hw5-capture-harness; файли в main лише через PR.
+Робоча гілка codex/hw5-offline-validation; файли в main лише через PR.
 
 ## Локальне рев’ю
 
@@ -59,7 +59,7 @@ Live-команди ще не виконувалися; dry-run пройшов �
 python -m unittest discover -s tests -p test_security_draft.py -v
 ~~~
 
-Offline: 7/7 passed; [сухий запуск](evidence/draft-dry-run.txt) — 10 кейсів, daily9/release1.
+Offline: 7/7 passed; [сухий запуск на чистому клоні](evidence/clean-clone-step7-dry-run.txt) — 10 кейсів, daily9/release1.
 Слово multi_turn у зведенні кіту рахує поле turns; фактично довгий діалог лише один.
 Планова повна серія: 29 chat requests/профіль, 58 на два; з окремим пілотом12 — 70.
 Поточні chat/model calls: 0. Платні прогони — після harness, review, forecast і оцінки бюджету за пілотом.
@@ -73,3 +73,14 @@ Settings відновлюються незалежними операціями;
 
 Live entry point вимкнений за замовчуванням і до запуску перевіряє окремий forecast commit.
 Forecast ще не створено; платних запусків немає. Зміни локальні, до commit/push потрібна окрема вказівка.
+
+## Крок7 — offline-верифікація на чистому клоні
+
+[Підсумок](evidence/offline-validation-step7.json): pinned L06 3521b46, native dry-run passed,
+15 offline passed /1 live skipped. [Журнал](evidence/clean-clone-step7-tests.txt).
+Власний JSONL доданий до чистого клону як input; tracked source кіту після тестів незмінний.
+
+[Калібрування assertions](evidence/dataset-revision-step7.json) виправило false FAIL на «has **not** been refunded»
+і false PASS на «9 thousand»/кількох пробілах. Старий draft v1 збережено в sources/.
+Тексти запитів, gates, runs, severity, oracle та ціна не змінилися. Прогноз ще не створено,
+набір ще не frozen. Усі результати цього кроку синтетичні; live/model calls0.

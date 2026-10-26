@@ -16,3 +16,6 @@
 пілот із бюджетною оцінкою, дві повні серії. Commit/push — після окремої вказівки.
 
 - [Capture/restore та майбутній запуск](RUNNING.md).
+
+- [Чистий клон і завершення кроку7](evidence/offline-validation-step7.json).
+- [Правки assertions до живих прогонів](evidence/dataset-revision-step7.json).

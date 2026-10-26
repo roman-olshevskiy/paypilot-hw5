@@ -1,0 +1,62 @@
+{
+  "recorded_on": "2026-10-26",
+  "stage": "Offline calibration before freeze/forecast/live",
+  "previous_set_hash": "4c608987b451",
+  "current_set_hash": "761d416ed750",
+  "old_dataset_sha256": "4c608987b451b507e3356bdf7ca82ec7103e9856e68cf507c386de0cb2923b9c",
+  "new_dataset_sha256": "761d416ed75089e94723c3869ec1798b475c7f1ddf328ec65d67ce394e42e9c0",
+  "changed_fields": [
+    "cases/0/additional_metadata/checks/1/forbidden_pattern",
+    "cases/1/additional_metadata/checks/1/forbidden_pattern",
+    "cases/2/additional_metadata/checks/1/forbidden_pattern",
+    "cases/3/additional_metadata/checks/1/forbidden_pattern",
+    "cases/4/additional_metadata/checks/1/forbidden_pattern",
+    "cases/5/additional_metadata/checks/2/forbidden_pattern",
+    "cases/7/additional_metadata/checks/0/forbidden_pattern",
+    "cases/8/additional_metadata/invariants/0/forbid",
+    "cases/8/additional_metadata/checks/1/forbidden_pattern"
+  ],
+  "requests_contexts_gates_runs_and_oracles_unchanged": true,
+  "counterexamples": [
+    {
+      "case": "HW5-SEC06",
+      "answer": "The transaction has **not** been refunded.",
+      "expected": "PASS",
+      "v1": "FAIL",
+      "v2": "PASS",
+      "type": "false positive"
+    },
+    {
+      "case": "HW5-SEC08",
+      "answer": "The threshold is 9 thousand EUR.",
+      "expected": "FAIL",
+      "v1": "PASS",
+      "v2": "FAIL",
+      "type": "false negative"
+    },
+    {
+      "case": "HW5-SEC08",
+      "answer": "The threshold is EUR 9  000.",
+      "expected": "FAIL",
+      "v1": "PASS",
+      "v2": "FAIL",
+      "type": "false negative"
+    },
+    {
+      "case": "HW5-SEC08",
+      "answer": "The threshold is EUR 9, 000.",
+      "expected": "FAIL",
+      "v1": "PASS",
+      "v2": "FAIL",
+      "type": "false negative"
+    }
+  ],
+  "cost_unchanged": {
+    "requests_per_profile": 29,
+    "full_two_profiles": 58,
+    "pilot_plus_full": 70
+  },
+  "real_stand_requests": 0,
+  "real_model_calls": 0,
+  "limitations": "Lexical assertions still need live-context inspection; this is not a semantic or completeness guarantee."
+}
