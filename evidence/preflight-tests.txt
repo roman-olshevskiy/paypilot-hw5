@@ -1,0 +1,9 @@
+test_00_record_committed_forecast (test_preflight_hw5.PreflightHW5.test_00_record_committed_forecast) ... ok
+test_10_read_only_api_and_seed (test_preflight_hw5.PreflightHW5.test_10_read_only_api_and_seed) ... ok
+test_20_runtime_source_and_configured_model (test_preflight_hw5.PreflightHW5.test_20_runtime_source_and_configured_model) ... ok
+test_30_settings_round_trip_without_chat_or_reset (test_preflight_hw5.PreflightHW5.test_30_settings_round_trip_without_chat_or_reset) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.043s
+
+OK

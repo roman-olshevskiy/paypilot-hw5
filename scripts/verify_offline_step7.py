@@ -34,7 +34,7 @@ def main():
     clone=workspace/"kit"
     project=workspace.name.lower()
     env=os.environ.copy()
-    env.update(HW5_ENABLE_PAID_RUNS="",HW5_KIT_DIR=str(clone),PYTHONPATH=str(clone),
+    env.update(HW5_ENABLE_PAID_RUNS="",HW5_RUN_PREFLIGHT="",HW5_KIT_DIR=str(clone),PYTHONPATH=str(clone),
                PYTHONDONTWRITEBYTECODE="1",PYTHONUTF8="1",STAND_DIR=str(SHARED),
                EVAL_STAND_URL="http://host.docker.internal:8000")
     docker_started=False
@@ -61,7 +61,13 @@ def main():
         tracked=checked(["git","status","--porcelain","--untracked-files=no"],clone).strip()
         if tracked:raise RuntimeError("Native tracked files were modified")
         match=re.search(r"Ran (\d+) tests",tests)
-        if not match or "skipped=1" not in tests:raise RuntimeError("Unexpected offline test summary")
+        skip=re.search(r"OK \(skipped=(\d+)\)",tests)
+        if not match or not skip:raise RuntimeError("Unexpected offline test summary")
+        skipped=int(skip.group(1))
+        preflight_skips=sum("test_preflight_hw5.PreflightHW5" in line and "... skipped" in line for line in tests.splitlines())
+        live_skips=sum("test_live_hw5.LiveHW5" in line and "... skipped" in line for line in tests.splitlines())
+        if skipped!=preflight_skips+live_skips or live_skips!=1:
+            raise RuntimeError("Unexpected skipped-test coverage")
         count=int(match.group(1))
         native=["loader.py","runner.py","stand.py","assertions.py","cli.py","validate.py","docker-compose.yml"]
         proof={"recorded_on":"2026-10-26","kit_commit":revision,
@@ -70,7 +76,7 @@ def main():
                "own_dataset_sha256":expected,"set_hash":expected[:12],
                "native_source_sha256":{n:sha(clone/n) for n in native},
                "native_docker_dry_run":"passed","offline_tests_run":count,
-               "offline_passed":count-1,"live_tests_skipped":1,
+               "offline_passed":count-skipped,"live_tests_skipped":live_skips,"preflight_tests_skipped":preflight_skips,
                "real_stand_requests":0,"real_model_calls":0,
                "prior_dataset_hashes_unchanged":True,
                "scope":"Fake HTTP integration and native dry-run; no live profile/DB/model exercised"}

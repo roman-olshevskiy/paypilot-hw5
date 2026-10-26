@@ -51,7 +51,7 @@ Live-команди ще не виконувалися; dry-run пройшов �
 | lesson-06 | ще не виконано | — |
 
 Попередні golden та здані домашні роботи не змінюються.
-Робоча гілка codex/hw5-forecast; файли в main лише через PR.
+Робоча гілка codex/hw5-preflight; файли в main лише через PR.
 
 ## Локальне рев’ю
 
@@ -72,7 +72,7 @@ Settings відновлюються незалежними операціями;
 Наявність слова «PASS» у fixture-тестах не є результатом реального стенду.
 
 Live entry point вимкнений за замовчуванням і до запуску перевіряє окремий forecast commit.
-Forecast підготовлено локально; commit proof ще відсутній, платних запусків немає. Зміни локальні, до commit/push потрібна окрема вказівка.
+Forecast commit518f675 підтверджено; [proof](evidence/forecast-commit.json), платних запусків немає. Зміни локальні, до commit/push потрібна окрема вказівка.
 
 ## Крок7 — offline-верифікація на чистому клоні
 
@@ -94,5 +94,17 @@ D23 multi SEC09 FAIL5/5 з першим витоком на ході3, легі�
 
 Першим за бізнес-впливом прогнозується D23, далі D10/D09/D08; за ефектністю D08/D09/D10/D23.
 Це гіпотези, не результати. Модель і реальну конфігурацію ще має підтвердити preflight.
-Окремий forecast commit поки не створено. До нього та запису його SHA в evidence/forecast-commit.json
-live entry point заблокований. Коміти/push не виконуються автоматично.
+Окремий forecast commit518f675 змержено; SHA й тотожність JSONL підтверджено в [proof](evidence/forecast-commit.json). Коміти/push не виконуються автоматично.
+
+## Preflight кроку9
+
+[Реальні тести](tests/test_preflight_hw5.py) —4/4 passed, [журнал](evidence/preflight-tests.txt).
+Runtime source hashes збігаються з checkout; configured provider/model — anthropic/claude-haiku-5-5,
+router вимкнений. Це конфігурація: назва моделі фактичного completion ще перевіряється у пілоті.
+[API/seed](evidence/preflight-api.json), [runtime](evidence/preflight-runtime.json),
+[settings round-trip](evidence/preflight-settings-roundtrip.json).
+
+Тимчасово змінені settings повернуто, таблиці дій не змінені; chat/reset/model calls0.
+Перший варіант тесту зайво вимагав admin=true; виправлено відповідно до require_server_write:
+на локальному unlocked стенді admin не потрібний. Обмеження доступу не обходилися.
+Наступний — окремий платний пілот кроку10; його ще не запускали.
