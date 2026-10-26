@@ -1,11 +1,13 @@
 """Offline checks and metrics for completed full series; preserves raw reports."""
+import argparse
+import uuid
 import hashlib
 import json
 import re
 import subprocess
 import sys
 from collections import Counter
-from datetime import datetime
+from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
 
@@ -20,6 +22,22 @@ def spans(t):
     for x in t.get("children",[]):yield from spans(x)
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--selection",type=Path,default=ROOT/"evidence/analysis-selection.json",
+                        help="JSON containing explicit full_runs and ledger_runs folder names")
+    args=parser.parse_args()
+    selection=read(args.selection)
+    names=selection["ledger_runs"]
+    selected_full=set(selection["full_runs"])
+    if not names or len(names)!=len(set(names)) or len(selected_full)!=len(selection["full_runs"]):
+        raise ValueError("Selection must contain unique run names")
+    if not selected_full or not selected_full.issubset(names):
+        raise ValueError("full_runs must be a nonempty subset of ledger_runs")
+    base=ROOT/"evidence/hw5-runs"
+    for name in names:
+        if not isinstance(name,str) or Path(name).name!=name or name in (".","..") or not (base/name/"manifest.json").is_file():
+            raise ValueError("Invalid or missing selected run: "+str(name))
+    output=ROOT/"evidence/analysis-runs"/(datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")+"-"+uuid.uuid4().hex[:8])
     dataset=ROOT/"evals/sets/l06_security.jsonl"
     freeze=read(ROOT/"evidence/dataset-freeze.json")
     assert hashlib.sha256(dataset.read_bytes()).hexdigest()==freeze["dataset_sha256"]
@@ -29,9 +47,10 @@ def main():
     forecast=read(ROOT/"evidence/forecast-commit.json")
     epoch=int(subprocess.check_output(["git","show","-s","--format=%ct",forecast["commit"]],cwd=ROOT,text=True))
     full=[];all_rows=[];ledger=[]
-    for folder in sorted((ROOT/"evidence/hw5-runs").iterdir()):
-        if not (folder/"manifest.json").exists():continue
+    for name in names:
+        folder=base/name
         m=read(folder/"manifest.json")
+        assert m["restore_status"]=="passed", "Settings were not restored: "+folder.name
         rows=read(folder/"captures.json")
         all_rows+=rows
         known=[Decimal(str(x["response"]["usage"]["cost_usd"])) for x in rows
@@ -43,12 +62,13 @@ def main():
           "completed_report":m["error"] is None and m["runner_exit_code"] in (0,1) and len(m["reports"])==1,
           "run_error":m["error"],"root_cost_known":len(known)==len(rows),
           "root_cost_known_subtotal_usd":float(sum(known,Decimal(0)))})
-        if "--only" in m["argv"]:continue
+        if folder.name not in selected_full:continue
+        if "--only" in m["argv"]:raise ValueError("Pilot cannot be selected as a full run")
         if m["error"] is not None or m["runner_exit_code"] not in (0,1) or not m["reports"]:
             # Preserve failed partial usage in ledger, never present it as a completed raw report.
             assert m["restore_status"]=="passed"
-            continue
-        assert len(rows)==m["complete_captures"]==m["chat_attempts"]==29
+            raise ValueError("Selected full run is incomplete: "+folder.name)
+        assert len(rows)==m["complete_captures"]==m["chat_attempts"]==sum(len(c["turns"])*c["additional_metadata"].get("runs",1) for c in original.values())
         assert m["restore_status"]=="passed" and not m["restore_errors"]
         assert not m["artifact_errors"] and m["error"] is None
         assert m["set_hash"]==freeze["set_hash"] and m["forecast_commit"]==forecast["commit"]
@@ -56,7 +76,7 @@ def main():
         report_path=ROOT/"reports"/m["reports"][0]
         assert hashlib.sha256(report_path.read_bytes()).hexdigest()==m["report_sha256"][report_path.name]
         report=read(report_path)
-        assert report["total"]==10 and report["set_hash"]==freeze["set_hash"]
+        assert report["total"]==len(cases) and report["set_hash"]==freeze["set_hash"]
         b,a=read(folder/"before.json"),read(folder/"restored.json")
         assert all(b[k]==a[k] for k in ["defects","clock","summarize","retrieval"])
         for row in rows:
@@ -82,7 +102,7 @@ def main():
               "threshold_match_turns":[x["turn"] for x in hits],
               "failed_checks":[x for x in verdict.checks if not x["passed"]],
               "request_ids":[x["response"]["request_id"] for x in part]})
-        assert len(repeats)==14
+        assert len(repeats)==sum(c["additional_metadata"].get("runs",1) for c in original.values())
         calls=[s for row in rows for s in spans(row["trace"]) if s.get("name")=="llm.call"]
         summaries=[s for row in rows for s in spans(row["trace"]) if s.get("name")=="agent.summarize"]
         row7=next(x for x in rows if x["case"]=="HW5-SEC07")
@@ -93,7 +113,7 @@ def main():
         full.append({"profile":m["profile"],"folder":folder.relative_to(ROOT).as_posix(),
           "report":report_path.relative_to(ROOT).as_posix(),"set_hash":report["set_hash"],
           "native_passed_cases":report["passed"],"native_total_cases":report["total"],
-          "native_passed_dialogs":sum(x["native_passed"] for x in repeats),"total_dialogs":14,
+          "native_passed_dialogs":sum(x["native_passed"] for x in repeats),"total_dialogs":len(repeats),
           "chat_requests":len(rows),"trace_observed_llm_calls":len(calls),"summary_spans":len(summaries),
           "completion_models":sorted({x["response"]["usage"]["model"] for x in rows}),
           "root_input_tokens":sum(x["response"]["usage"]["input_tokens"] for x in rows),
@@ -106,30 +126,29 @@ def main():
           "d10":{"request_id":row7["response"]["request_id"],"send_statement_attempts":len(send),
                  "successful_send_calls":sum("error" not in (s.get("attributes",{}).get("tool.result") or {}) for s in send),
                  "statement_rows":row7["state_after"]["statements_sent"]}})
-    assert len(full)==2 and {x["profile"] for x in full}=={"clean","lesson-06"}
+    assert len(full)==len(selected_full)
     partial=[x for x in ledger if x["phase"]=="full" and not x["completed_report"]]
-    assert len(ledger)==5 and len(partial)==1
-    assert sum(x["captured_responses"] for x in partial)==19
-    expected=70+sum(x["chat_attempts"] for x in partial)
-    assert sum(x["chat_attempts"] for x in ledger)==expected
+    expected=sum(x["chat_attempts"] for x in ledger)
     ids=[x["response"]["request_id"] for x in all_rows]
     assert len(ids)==len(set(ids))==expected
     sessions={x["response"]["session_id"] for x in all_rows}
-    assert len(sessions)==34+sum(x["independent_sessions"] for x in partial)
+    assert len(sessions)==sum(x["independent_sessions"] for x in ledger)
     assert all(x["root_cost_known"] for x in ledger)
-    result={"recorded_on":"2026-10-26","set_hash":freeze["set_hash"],"full_runs":full,
+    result={"recorded_on":datetime.now(timezone.utc).isoformat(),"selection":selection,"set_hash":freeze["set_hash"],"full_runs":full,
       "ledger":ledger,"total_chat_requests_including_pilot":len(ids),"independent_sessions_including_pilot":len(sessions),
-      "completed_full_chat_requests":58,"failed_partial_chat_requests":sum(x["captured_responses"] for x in partial),
+      "completed_full_chat_requests":sum(x["chat_requests"] for x in full),"failed_partial_chat_requests":sum(x["captured_responses"] for x in partial),
       "failed_partial_root_cost_usd":round(sum(x["root_cost_known_subtotal_usd"] for x in partial),6),
       "full_root_cost_usd":round(sum(x["root_cost_usd"] for x in full),6),
       "all_root_cost_usd":round(sum(x["root_cost_known_subtotal_usd"] for x in ledger),6),
       "balance_after_pilot_before_full_usd":17.09,"full_balance_reconciliation":read(ROOT/"evidence/balance-after-full.json") if (ROOT/"evidence/balance-after-full.json").exists() else "pending",
-      "limits":"Counts/verdicts are native+replay, not semantic proof. D08 markers, D09 quotes and D10 backend exercise need manual evidence review in step12. Root cost is not an invoice."}
-    (ROOT/"evidence/full-run-analysis.json").write_bytes((json.dumps(result,ensure_ascii=False,indent=2)+chr(10)).encode())
+      "limits":"Metrics cover only selected runs. Historical balance confirmation covers the original submission ledger, not arbitrary new selections. Semantic conclusions and limitations: docs/security-analysis.md. Root cost is not an invoice."}
+    output.mkdir(parents=True,exist_ok=False)
+    (output/"analysis.json").write_bytes((json.dumps(result,ensure_ascii=False,indent=2)+chr(10)).encode())
+    print("Output: "+str(output),flush=True)
     print(json.dumps({k:v for k,v in result.items() if k not in ("full_runs","ledger")},ensure_ascii=False,indent=2))
     for run in full:
-        print(run["profile"],str(run["native_passed_cases"])+"/10 cases",
-              str(run["native_passed_dialogs"])+"/14 dialogs","root USD",run["root_cost_usd"])
+        print(run["profile"],str(run["native_passed_cases"])+"/"+str(run["native_total_cases"])+" cases",
+              str(run["native_passed_dialogs"])+"/"+str(run["total_dialogs"])+" dialogs","root USD",run["root_cost_usd"])
         print("D23 first matches:",[x["first_threshold_match_turn"] for x in run["repeats"] if x["case"]=="HW5-SEC09"])
 
 if __name__=="__main__":main()

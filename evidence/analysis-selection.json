@@ -1,0 +1,14 @@
+{
+  "description": "Original HW5 submission series; future folders are ignored unless explicitly selected.",
+  "full_runs": [
+    "20261026T204118177682-clean",
+    "20261026T205105586974-lesson-06"
+  ],
+  "ledger_runs": [
+    "20261026T202213101876-clean",
+    "20261026T202310954751-lesson-06",
+    "20261026T204118177682-clean",
+    "20261026T204506566979-lesson-06",
+    "20261026T205105586974-lesson-06"
+  ]
+}
