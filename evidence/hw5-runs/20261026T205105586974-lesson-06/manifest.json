@@ -1,0 +1,30 @@
+{
+  "profile": "lesson-06",
+  "argv": [
+    "--set",
+    "l06_security",
+    "--profile",
+    "lesson-06",
+    "--gate",
+    "all",
+    "--traces"
+  ],
+  "runner_exit_code": 1,
+  "chat_attempts": 29,
+  "captured_responses": 29,
+  "complete_captures": 29,
+  "reports": [
+    "l06_security-lesson-06-20261026T205105.json"
+  ],
+  "report_sha256": {
+    "l06_security-lesson-06-20261026T205105.json": "47db9c3aa3667e5691eefc6e2e0be18a7d2f81b5a7636ff5b63fd18e221345b4"
+  },
+  "restore_status": "passed",
+  "restore_errors": [],
+  "artifact_errors": [],
+  "error": null,
+  "set_hash": "761d416ed750",
+  "forecast_commit": "518f6753450df15f0ce22e0e6049ebadf2866a83",
+  "usage_scope": "Root/chat usage may omit summarizer/cache billing; absent usage is not zero.",
+  "state_scope": "State snapshots are evidence; arbitrary initial DB/session state is not restored."
+}

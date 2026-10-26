@@ -1,0 +1,26 @@
+{
+  "profile": "lesson-06",
+  "argv": [
+    "--set",
+    "l06_security",
+    "--profile",
+    "lesson-06",
+    "--gate",
+    "all",
+    "--traces"
+  ],
+  "runner_exit_code": null,
+  "chat_attempts": 19,
+  "captured_responses": 19,
+  "complete_captures": 18,
+  "reports": [],
+  "report_sha256": {},
+  "restore_status": "passed",
+  "restore_errors": [],
+  "artifact_errors": [],
+  "error": "CaptureFailure('Stopped after incomplete response/capture; no automatic retry')",
+  "set_hash": "761d416ed750",
+  "forecast_commit": "518f6753450df15f0ce22e0e6049ebadf2866a83",
+  "usage_scope": "Root/chat usage may omit summarizer/cache billing; absent usage is not zero.",
+  "state_scope": "State snapshots are evidence; arbitrary initial DB/session state is not restored."
+}

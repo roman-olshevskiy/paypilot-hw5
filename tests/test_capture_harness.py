@@ -170,6 +170,38 @@ class CaptureHarness(unittest.TestCase):
         with mock.patch.dict(os.environ,{"HW5_ENABLE_PAID_RUNS":""}),\
              mock.patch.object(C.importlib,"import_module",side_effect=AssertionError("native import")):
             with self.assertRaisesRegex(C.CaptureFailure,"Live calls disabled"):C.main([])
+    def test_transient_windows_lock_retries_io_without_repeating_chat(self):
+        replace=Path.replace
+        failures=[]
+        def temporarily_locked(path,target):
+            if path.name=="captures.json.tmp" and len(failures)<2:
+                failures.append(str(path))
+                raise PermissionError(13,"synthetic Windows reader lock")
+            return replace(path,target)
+        with mock.patch.object(Path,"replace",temporarily_locked),mock.patch.object(C.time,"sleep"):
+            self.assertEqual(self.run_native(),0)
+        self.assertEqual(len(failures),2)
+        self.assertEqual(self.backend.n,6)  # No chat was repeated.
+        _,manifest=self.artifacts()
+        self.assertEqual(manifest["complete_captures"],6)
+        self.assertEqual(manifest["restore_status"],"passed")
+
+    def test_persistent_file_lock_is_bounded_and_does_not_repeat_chat(self):
+        replace=Path.replace
+        locked=[]
+        def always_locked(path,target):
+            if path.name=="captures.json.tmp":
+                locked.append(str(path))
+                raise PermissionError(13,"synthetic persistent file lock")
+            return replace(path,target)
+        with mock.patch.object(Path,"replace",always_locked),mock.patch.object(C.time,"sleep"):
+            with self.assertRaises(C.CaptureFailure):self.run_native()
+        self.assertEqual(self.backend.n,1)
+        self.assertEqual(len(locked),16)  # Eight attempts on capture and eight on final persistence.
+        _,manifest=self.artifacts()
+        self.assertEqual(manifest["restore_status"],"passed")
+        self.assertTrue(manifest["artifact_errors"])
+
     def test_report_path_escape_is_rejected(self):
         reports=self.kit/"reports";reports.mkdir()
         report=reports/"unsafe.json"

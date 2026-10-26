@@ -1,0 +1,14 @@
+{
+  "recorded_on": "2026-10-26",
+  "source": "Direct balance confirmation in this chat after full runs",
+  "method": "available balance shown to two decimals",
+  "start_balance_usd": 17.1,
+  "after_pilot_balance_usd": 17.09,
+  "after_full_balance_usd": 17.05,
+  "observed_total_delta_usd": 0.05,
+  "observed_delta_since_pilot_usd": 0.04,
+  "all_recorded_root_cost_usd": 0.046098,
+  "full_and_partial_root_cost_usd": 0.038604,
+  "reconciliation": "consistent_at_display_precision",
+  "scope": "Balance movements agree with root-cost estimates at two-decimal display precision. No itemized invoice or independent billing-category reconciliation."
+}
